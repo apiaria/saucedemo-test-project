@@ -2,15 +2,15 @@ import { test, expect } from '@playwright/test';
 import { ErrorMessages, Urls } from '@constants/testData';
 import { PageManager } from '@pages/pageManager';
 
-
 test.describe('Authentication tests - Login with Valid Users', () => {
     let pm: PageManager;
         
-    test.beforeEach('navigate to Base Url 1', async ({ page }) => {
+    test.beforeEach('navigate to Base Url', async ({ page }) => {
         pm = new PageManager(page);
         await pm.onBasePage().navigateTo('/');
     });
 
+    // Successful login with valid users
     [
         { username: process.env.STANDARD_USER_USERNAME, password: process.env.PASSWORD},
         { username: process.env.PROBLEM_USER_USERNAME, password: process.env.PASSWORD},
@@ -62,7 +62,7 @@ test.describe('Authentication tests - Login: Negative Cases', () => {
 
     let pm: PageManager;
         
-    test.beforeEach(async ({ page }) => {
+    test.beforeEach('navigate to base Url', async ({ page }) => {
         pm = new PageManager(page);
         await pm.onBasePage().navigateTo('/');
     });
@@ -104,7 +104,7 @@ test.describe('Authentication tests - Login: Negative Cases', () => {
 test.describe('Authentication tests - Security checks', () => {
     let pm: PageManager;
         
-    test.beforeEach(async ({ page }) => {
+    test.beforeEach('navigate to base url', async ({ page }) => {
         pm = new PageManager(page);
         await pm.onBasePage().navigateTo('/');
     });
