@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@pages/*": ["pages/*"],
+            "@locators/*" : ["pages/locators/*"],
+            "@utils/*": ["utils/*"],
+            "@helpers/*": ["utils/helpers/*"],
+            "@constants/*": ["utils/constants/*"],
+            "@config/*": ["src/config/*"]
+        },
+        "typeRoots": ["./node_modules/@types", "./src/types"]
+    },
+    "include": ["src/**/*.ts", "tests/**/*.ts"],
+    "exclude": ["node_modules"]
+}

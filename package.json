@@ -1,0 +1,17 @@
+{
+  "name": "saucedemo-test-project",
+  "version": "1.0.0",
+  "description": "Sauce Demo Website Test Project",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "Tanya Petrova",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.53.1",
+    "@types/node": "^24.0.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
