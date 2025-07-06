@@ -34,7 +34,9 @@ export const Inventory = {
     sortOptionMap: {
         name: { asc: 'az', desc: 'za' },
         price: { asc: 'lohi', desc: 'hilo' }
-    }
+    },
+    ADD_TO_CART_TXT: 'Add to cart',
+    REMOVE_TXT: 'Remove'
 };
 
 export const Cart = { 
