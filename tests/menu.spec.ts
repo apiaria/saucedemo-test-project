@@ -26,17 +26,15 @@ test.describe('Burger Menu Tests - Basic Functionality', () => {
         await pm.onBasePage().closeBurgerMenu();
     });
 
-    // Test should fail
-    // test.fail - validates that the test is failing 
+    // Test is failing due to bug
+    // marked as test.fail until bug is fixed
     test.fail('Verify All Items Link from Products page - correct navigation', async({}) => {
         await pm.onProductPage().validateAllProducts();
-        // should fail
         await pm.onBasePage().validateAllItemsLink();
     });
 
     test('Verify All Items Link from Random product page - correct navigation', async({}) => {
         await pm.onProductPage().openRandomProduct();
-        // should succeed
         await pm.onBasePage().validateAllItemsLink();
     });
 
@@ -44,6 +42,8 @@ test.describe('Burger Menu Tests - Basic Functionality', () => {
         await pm.onBasePage().validateAbout();
     });
 
+    // Test is failing due to bug
+    // marked as test.fail until bug is fixed
     test.fail('Validate Reset App State', async({}) => {
         await pm.onCartPage().validateResetState();
     });

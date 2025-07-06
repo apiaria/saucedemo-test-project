@@ -103,7 +103,7 @@ export class BasePage {
         expect(await this.isMenuOpen()).toBe(true);
         // click button to close it
         await this.clickElementByName(Common.CLOSE_MENU_TXT);
-        await this.waitForMenuState(false); // wait until cit is closed        
+        await this.waitForMenuState(false); // wait until menu is closed        
     }   
 
     /**
@@ -137,7 +137,8 @@ export class BasePage {
     }
 
     /**
-     * Validate All Items link from Burger Menu - expected to redirect to Inventory page regardless of current location and to close the menu
+     * Validate All Items link from Burger Menu - expected to redirect to Inventory page regardless of current location 
+     * and to close the menu
      */
     async validateAllItemsLink() {        
         await this.openBurgerMenu();
@@ -171,7 +172,6 @@ export class BasePage {
         await this.secondaryHeader.waitFor({ state: 'visible', timeout: 5000 });
         await expect(this.secondaryHeader).toHaveText(title);
     }
-
 
     async assertFooter() {
         await expect(this.footerFbLink).toBeEnabled();
@@ -214,7 +214,7 @@ export class BasePage {
      * @param expected - the expected value that should be shown in the badge
      */
     async validateCartBadge(expected: string) {
-        await expect(this.cartBadge).toBeVisible();
+        await this.validateCartBadgeVisibility(true);
         await expect(this.cartBadge).toHaveText(expected);
     }
 
@@ -229,5 +229,4 @@ export class BasePage {
             await expect(this.cartBadge).toBeHidden();
         }
     }
-
 }

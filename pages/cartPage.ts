@@ -69,8 +69,6 @@ export class CartPage extends BasePage {
         const productDesc = await product.description.innerText();
         const productPrice = await product.price.innerText();
 
-        // await this.validateCartBadge('1');
-
         await this.openCart();
 
         const cartItem = this.page.locator('.cart_item', {
@@ -189,6 +187,7 @@ export class CartPage extends BasePage {
 
     // CHECKOUT LOGIC
     async proceedToCheckout() {
+        await expect(this.cartItem).toHaveCount(1);
         await expect(this.checkoutButton).toBeEnabled();
         await this.checkoutButton.click();
         await this.assertSecondaryHeader(Checkout.CHECKOUT_TITLE);
@@ -213,7 +212,7 @@ export class CartPage extends BasePage {
         await this.assertSecondaryHeader(Checkout.CHECKOUT_OVERVIEW_TITLE);
         await expect(this.finishButton).toBeEnabled();
         await expect(this.cancelButton).toBeEnabled();
-        // TODO - verify product details
+        // TODO - verify product details are correct
     }
 
     async completeOrder() {
@@ -248,14 +247,13 @@ export class CartPage extends BasePage {
     }
 
     async validateWrongFields() {
-        // TODO
+        // TODO - extend method to validate form fields with wrong values for inputs - e.g. special chars
     }
 
     async cancelCheckout() {
         await this.cancelButton.click();
-        // TODO
-        // assert user is back to cart
-        // assert product is still there
+        await this.assertPageLoaded(Urls.CART_URL);
+        await expect(this.cartItem).toHaveCount(1);
     }
 
 }

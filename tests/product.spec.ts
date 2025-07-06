@@ -20,8 +20,6 @@ test.describe('Products Tests - Products List' , () =>{
         await pm.onProductPage().validateAllProducts();
     });
 
-    // TODO - add more test cases for products list
-
 });
 
 test.describe('Products Tests - Single Product Page', () => {
@@ -42,12 +40,18 @@ test.describe('Products Tests - Single Product Page', () => {
         await pm.onProductPage().openRandomProduct();
         await pm.onProductPage().validateProductHeader();
 
-        // TODO - verify with different users!!
-
+        /**
+         * TODO: Validate behavior when a random product is selected and opened when logged in with a problematic user 
+         * (e.g. Error user, visual user, etc.). 
+         * Check for product rendering bugs or navigation inconsistencies.
+         */
+        
     }); 
 
-    test('Open a non existing product', async() => {
-        // TODO 
+    // Test is failing due to bug
+    // marked as test.fail until bug is fixed 
+    test.fail('Open a non existing product', async() => {
+        await pm.onProductPage().validateItemNotFound();
     });
 
 });

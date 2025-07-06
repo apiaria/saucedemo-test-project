@@ -188,6 +188,16 @@ export class ProductPage extends BasePage {
 
         expect(src).toBe(productSrc);
     }
+
+    async validateItemNotFound() {
+        const nonExistingId = 9999;
+        await this.navigateTo(`${Urls.PRODUCT_URL}${nonExistingId}`);
+        await this.assertPageLoaded(`${Urls.PRODUCT_URL}${nonExistingId}`);
+        expect.soft(this.page.locator(this.productName)).toHaveText(Inventory.ITEM_NOT_FOUND_TXT);
+        expect.soft(this.page.locator(this.productDesc)).not.toBeVisible();
+        expect.soft(this.page.locator(this.productPrice)).not.toBeVisible();
+        expect.soft(this.page.locator(this.addToCartButton)).not.toBeEnabled();
+    }
     
     /**
      * Sorting Function

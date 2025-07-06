@@ -18,7 +18,7 @@ test.describe('Cart Tests - Basic Functionality', () => {
         await pm.onCartPage().addRemoveSingleItemToCart();
     });
 
-    test('Add Multiple Items to Cart (2)', async({}) => {
+    test('Add and remove Multiple Items to Cart (2)', async({}) => {
         await pm.onCartPage().addRemoveMultipleItemsToCart(2);
     });
 
