@@ -1,5 +1,5 @@
 # Introduction
-SauceDemo Test Project is a test project with UI tests for the [saucedemo.com](https://www.saucedemo.com/) website using Playwright and TypeScript.
+SauceDemo Test Project is a test automation project with UI tests for the [saucedemo.com](https://www.saucedemo.com/) website using Playwright and TypeScript.
 
 The focus of this project is to present a demo test automation framework for testing main functionalities of the mentioned website:
 - Authentication
@@ -16,26 +16,36 @@ The focus of this project is to present a demo test automation framework for tes
 | File / Folder          | Description                                                                                       |
 |------------------------|---------------------------------------------------------------------------------------------------|
 | `tsconfig.json`        | TypeScript compiler configuration. Includes aliases, strict rules, and base paths.                |
-| `playwright.config.ts` | Central Playwright configuration: test settings, reporters, retries, etc.               |
+| `playwright.config.ts` | Central Playwright configuration: test settings, reporters, retries, etc.                         |
 | `package.json`         | NPM project file: lists dependencies, scripts, and metadata.                                      |
 | `.env`                 | Actual environment variables used during test runs.                                               |
 | `.env.example`         | Template file to document required env variables (shared across teams/CI).                        |
 | `.gitignore`           | Prevents sensitive or unnecessary files (e.g. `node_modules`, test reports) from being committed. |
-| `playwright-report/`   | Auto-generated HTML test report folder.                                                           |
-| `test-results/`        | Output logs, traces, and videos from test runs.                                                   |
+| `playwright-report/`   | Auto-generated HTML test report folder with report, screenshots on failures, etc.                 |
+| `test-results/`        | Output logs, traces, and videos from test runs. This folder is for the json report logs.          |
 
 ---
 
 ### `tests/` 
 
-- `global.setup.ts` - a file with validation check for env variables, setup as a project dependency to the E2E tests project and ment to execute once before all other tests, to make sure all needed env variables are set and available for test execution 
-- actual tests for the project
+- `global.setup.ts` - a file with validation check for env variables, setup as a project dependency to the E2E tests project and meant to execute once before all other tests, to make sure all needed env variables are set and available for test execution. 
+- `authentication.spec.ts` - test file that holds actual authentication tests, grouped in test suites logically
+- `menu.spec.ts` - test file that holds actual tests for the burger menu functionality, also grouped in test suites
+- `product.spec.ts` - test file with tests related to products - all products and a single product, grouped in test suites.
+- `cart.spec.ts` - test file with tests related to add to cart functionality
+- `checkout.spec.ts` - test file with tests related to checkout functionality grouped into test suites
 
 ---
 
 ### `pages/`
 
-Implements the Page Object Model (POM) for better test abstraction and reusability. Locators are separated from the Page Objects in a separate folder `locators/`.
+Page Object Model (POM) is used in this project for better abstraction and reusability.
+- `locators/` - locators are stored in a separate folder, in different files following the pages model
+- `basePage.ts` - BasePage class - used for all common methods
+- `loginPage.ts` - LoginPage class - used for login/logout logic
+- `productPage.ts` - ProductPage class - used for product related logic
+- `cartPage.ts` - CartPage class - used for cart and checkout related logic
+- `pageManager.ts` - PageManager class combining all page objects at once for easier maintenance and control
 
 ---
 
@@ -44,7 +54,7 @@ Implements the Page Object Model (POM) for better test abstraction and reusabili
 Contains common utility code to keep tests clean and DRY.
 
 - `constants/testData.ts` - static test data used in the tests
-- `helpers/helperFunctions.ts` - helper functions containing login, logout functionality as well as other helper functions used in tests
+- `helpers/helperFunctions.ts` - helper functions containing login, logout functionality used in tests
 
 ---
 
@@ -84,8 +94,10 @@ Workflow overview:
 ---
 
 ## 2. Installation process
+
 1. Clone the repo using the commands below:
 - ssh:
+
 ```
  git clone git@github.com:apiaria/saucedemo-test-project.git
 ```
@@ -110,6 +122,8 @@ npx playwright install
 ## 1. Setup .env file
 
 Before proceeding to any test execution, make sure to copy `.env.example` file and store it as `.env` in the root folder of the project. After that replace the example values for each variable with the actual ones and then proceed to test execution.
+
+---
 
 ## 2. Run tests in the terminal
  - Run all tests headless on the configed browsers (in the playwright.config.ts)
@@ -155,7 +169,7 @@ There are built-in reporters in Playwright used in the project:
 
 2. Dot reporter:
 
-Used instead of list reporter on CI.
+Used instead of **list** reporter on CI. It is the default report for CI and prefered as it avoids too much output which makes it a good choice for a CI test execution.
 
 ---
 
