@@ -7,12 +7,12 @@ test.describe('Burger Menu Tests - Basic Functionality', () => {
     
     let pm: PageManager;
     
-    test.beforeEach(async ({ page }) => {
+    test.beforeEach('navigate to base url and login', async({ page }) => {
         pm = new PageManager(page);
         await login(pm);
     });
 
-    test.afterEach(async () => {
+    test.afterEach('logout', async() => {
         await logout(pm);
     });
 
@@ -26,21 +26,26 @@ test.describe('Burger Menu Tests - Basic Functionality', () => {
         await pm.onBasePage().closeBurgerMenu();
     });
 
-    
-    test('Verify All Items Link from Products page - correct navigation', async({}) => {
-        // TODO
+    // Test should fail
+    // test.fail - validates that the test is failing 
+    test.fail('Verify All Items Link from Products page - correct navigation', async({}) => {
+        await pm.onProductPage().validateAllProducts();
+        // should fail
+        await pm.onBasePage().validateAllItemsLink();
     });
 
     test('Verify All Items Link from Random product page - correct navigation', async({}) => {
-        // TODO
+        await pm.onProductPage().openRandomProduct();
+        // should succeed
+        await pm.onBasePage().validateAllItemsLink();
     });
 
     test('Verify About - correct navigation' , async({}) => {
         await pm.onBasePage().validateAbout();
     });
 
-    test('Validate Reset App State', async({}) => {
-        // TODO
+    test.fail('Validate Reset App State', async({}) => {
+        await pm.onCartPage().validateResetState();
     });
 
 });
